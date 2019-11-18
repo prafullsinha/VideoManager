@@ -43,6 +43,7 @@ class UploadView(TemplateView):
         if form.is_valid():
             profile1 = form.save(commit=False)
             profile1.created_on = datetime.datetime.now()
+            profile1.date = datetime.date.today()
             profile1.save()
             return redirect('home')
         else:
@@ -116,12 +117,24 @@ class FilterView(ListView):
 
     def get(self, request, *args, **kwargs):
         query = self.request.GET.get('q')
-        if type(query) == int:
-            query = float(query)
-        form = VideoModel.objects.all()
+        form = VideoModel.objects.filter(date=query)
         context = {
             'form': form,
             'query': query
         }
         return render(request, self.template_name, context)
 
+
+class Filter1View(ListView):
+    model = VideoModel
+    template_name = 'manager/filter.html'
+
+    def get(self, request, *args, **kwargs):
+        query = self.request.GET.get('q')
+        query = float(query)
+        form = VideoModel.objects.filter(duration__lte=query)
+        context = {
+            'form': form,
+            'query': query
+        }
+        return render(request, self.template_name, context)
