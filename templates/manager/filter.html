@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="row justify-content-center"><h3>Welcome to home page of Vidgyor!!!</h3></div><br><br>
+
+        <div class="col=6">
+                    <div class="Container">
+                          <h1>Search Results</h1>
+                            <table style="width:80%">
+                                <tr>
+                                    <th>Thumbnail</th>
+                                    <th>Title</th>
+                                    <th>Created_on</th>
+                                    <th>Duration</th>
+                                </tr>
+                                {% for e in form %}
+                                    {% if e.created_on.date == query or e.duration <= query %}
+                                        <tr>
+                                            <td><img src='{{ MEDIA_URL }}{{ e.thumbnail }}' width="40" height="40"></td>
+                                            <td> <a href="/editmeta/{{ form.title }}/">{{ e.title }}</a></td>
+                                            <td>{{ e.created_on }}</td>
+                                            <td>{{ e.duration }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            </table>
+                    </div>
+                </div>
+            </div>
+{% endblock %}
+

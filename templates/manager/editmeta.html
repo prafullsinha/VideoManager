@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h3>Metadata Update Page</h3>
+<p>Welcome to Vidgyor, {{ user.username }} !!</p>
+<div class="row justify-content-center">
+    <div class="container">
+        <br><br>
+        <video width='400' controls>
+            <source src='{{ MEDIA_URL }}{{ post.videofile }}' type='video/mp4'>
+            Your browser does not support the video tag.
+        </video>
+        <br><br>
+    </div>
+</div>
+<div class="row justify-content-left">
+        <div class="col=6">
+                    <div class="Container">
+                        <h4>Make changes and click submit!!</h4><br>
+                        <h5>Video:</h5>
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                             <table class="table">
+                            {% for field in form %}
+                            <tr>
+                                <td>{{ field.label_tag }}</td>
+                                <td>{{ field }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+        </div>
+</div>
+
+{% endblock %}

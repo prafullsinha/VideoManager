@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<table>
+    <tr>
+        <td><form action="{% url 'filter' %}" method="get">
+                            <input name="q" type="date" placeholder="Filter by: Date">
+                            <button type="submit" class="btn btn-primary ml-2"> filter by date </button>
+                        </form></td>
+        <td><h3>.....!!!!!    Video Manager     !!!!!.....</h3></td>
+        <td>
+             <form action="{% url 'filter' %}" method="get">
+                            <input name="q" type="number" placeholder="Filter by: Duration">
+                            <button type="submit" class="btn btn-primary ml-2"> filter by duration </button>
+                        </form>
+        </td>
+    </tr>
+</table>
+<br><br><br>
+        <div class="col=6">
+                    <div class="Container">
+
+
+                            <table style="width:80%">
+                                <tr>
+                                    <th>Thumbnail</th>
+                                    <th>Title</th>
+                                    <th>Created_on</th>
+                                    <th>Duration</th>
+                                </tr>
+                                {% for e in q %}
+                                    <tr>
+                                        <td><img src='{{ MEDIA_URL }}{{ e.thumbnail }}' width="40" height="40"></td>
+                                        <td> <a href="/editmeta/{{ e.title }}/">{{ e.title }}</a></td>
+                                        <td>{{ e.created_on }}</td>
+                                        <td>{{ e.duration }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        {% else %}
+                            <h3><p>Manager Login For Vidgyor !!!!</p></h3>
+                        <ul>
+                            <li>Search , Filter Videos</li>
+                            <li>Edit Metadata of Videos</li>
+                            <li>Upload a new Video</li>
+                        </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+{% endblock %}
