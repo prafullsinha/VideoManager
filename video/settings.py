@@ -26,8 +26,8 @@ SECRET_KEY = 'dtw!53jo9tb$t*+2tk=er=pc5ag(dnb*5pd2s0xm2554%^7nq$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['herokuvideoapp.herokuapp.com']
-
+#ALLOWED_HOSTS = ['herokuvideoapp.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
